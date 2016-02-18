@@ -3,6 +3,30 @@ extends layout
 block append scripts
 	script(src='./javascripts/home.js')
 
-block content
-	h1= title
-	p Welcome to #{title}
+block append content
+	header
+		div(class='row intro blue darken-2')
+			div(class='col s2')
+				img(class='responsive-img' src='/images/hunter_pixel.png')			
+			div(class='col s10')
+				h1= title
+		div(class='row')
+			nav(class='blue darken-4')
+				div(class='nav-wrapper col s12')
+					a(href='#' data-activates='mobile-nav' class='button-collapse'): i(class='material-icons') menu
+					ul(class='hide-on-med-and-down')
+						li(class='col s1'): a(href='/'): i(class='material-icons') store
+						li(class='col s3'): a(href='/blog') Blog
+						li(class='col s3'): a(href='/projects') Projects
+						li(class='col s3'): a(href='/about') About
+					div(class='col s2 valign-wrapper')
+						a(href='https://www.twitter.com/eighthnotegames'): img(class='responsive-img' src='/images/TwitterLogo.png')
+						a(href='https://www.facebook.com/eighthnotegames'): img(class='responsive-img' src='/images/fb_logo.png')
+						a(href='https://www.linkedin.com/in/jeremydormitzer'): img(class='responsive-img' src='/images/linkedin_logo.png')
+					ul(class='side-nav' id='mobile-nav')
+						li: a(href='/'): i(class='material-icons') store
+						li: a(href='/blog') Blog
+						li: a(href='/projects') Projects
+						li: a(href='/about') About
+	main
+		
