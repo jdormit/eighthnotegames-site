@@ -27,17 +27,19 @@ function load_blog(callback) {
 	var blog_html = "";
 	$.getJSON(feed, function(json) {
 		var entries = json.feed.entry;
-		console.log(feed);
 		$.each(entries, function () {
 			var post = $(this);
+			console.log(post);
+			content = this.content.$t;
 			blog_html += "<div class='row blog'>" +
-							"<div class='col s12'>" +
-								"<div class='card green lighten-3'>" +
-									"<div class='card-content'>" +
-										"<span class='card-title'>" + this.title.$t + "</span>" +
-										"<p>" + this.content.$t + "</p>" +
-									"</div>" +
-								"</div>" +
+							"<div class='col s10 push-s1'>" +
+							//	"<div class='card green lighten-3'>" +
+							//		"<div>" +
+								"<h1>" + this.title.$t +"</h1>" +
+								"<p class='flow-text'>" + content + "</p>" +
+								"<div class='divider'></div>" +
+							//		"</div>" +
+							//	"</div>" +
 							"</div>" +
 						"</div>";
 			callback(blog_html);
@@ -50,5 +52,7 @@ function load_projects() {
 }
 
 function load_about() {
-	return "I am Eighth Note Games and I am amazing!";
+	$.get('/html/about.html', function(data) {
+		return data;
+	});
 }
