@@ -63,14 +63,21 @@ function load_main(callback) {
 			var tweets_obj = JSON.parse(tweet_results);
 			for (tweet in tweets_obj) {
 				var img_string = "";
+				var tweet_url = "https://twitter.com/statuses/" + tweets_obj[tweet].id_str;
 				if (tweets_obj[tweet].entities.media) { //render any pics
-					img_string = "<img class='responsive-img' src='" + tweets_obj[tweet].entities.media[0].media_url_https + "'>"
+					img_string= "<div class='card-image'>"+
+									"<img src='" + tweets_obj[tweet].entities.media[0].media_url_https + "'>" +
+								"</div>"
 				}
 				$(home_html).find('#tweets').append(
-					"<div class='card-panel light-green darken-1 valign-wrapper'>" +
-						"<span class='white-text'>" + tweets_obj[tweet].text + "</span>" +
-						img_string +
-					"</div>"
+					"<a href='" + tweet_url + "' target='_blank'>" +
+						"<div class='card hoverable red darken-1'>" +
+							img_string +
+							"<div class='card-content'>" +
+								"<p class='white-text'>" + tweets_obj[tweet].text + "</p>" +
+							"</div>" +
+						"</div>" +
+					"</a>"
 				);
 			}
 			callback(home_html);

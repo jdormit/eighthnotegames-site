@@ -21,7 +21,7 @@ router.get('/', function(req, res, next) {
 /* GET twitter feed. */
 router.get('/tweets', function (req, res, next) {
 	console.log('getting tweets');
-	twitter.getUserTimeline({screen_name: 'eighthnotegames', count: '10'}, twitterError, function(tweets) {
+	twitter.getUserTimeline({screen_name: 'eighthnotegames', count: '4'}, twitterError, function(tweets) {
 		res.json(tweets);
 	});
 });
