@@ -25,5 +25,11 @@ main .blog a:visited {
   color: #f44336; }
 main .blog a:hover {
   color: #d500f9; }
+main .about a:link {
+  color: #0d47a1; }
+main .about a:visited {
+  color: #b0bec5; }
+main .about a:hover {
+  color: #ff9100; }
 
 /*# sourceMappingURL=style.css.map */
