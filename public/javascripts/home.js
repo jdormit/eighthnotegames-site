@@ -130,7 +130,7 @@ function load_main(callback) {
 			var tweets_obj = JSON.parse(tweet_results);
 			for (tweet in tweets_obj) {
 				var img_string = "";
-				var tweet_url = "https://twitter.com/statuses/" + tweets_obj[tweet].id_str;
+				var tweet_url = "https://twitter.com/" + tweets_obj[tweet].user.id_str + "/status/" + tweets_obj[tweet].id_str;
 				if (tweets_obj[tweet].entities.media) { //render any pics
 					img_string= "<div class='card-image'>"+
 									"<img src='" + tweets_obj[tweet].entities.media[0].media_url_https + "'>" +
