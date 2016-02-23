@@ -112,7 +112,7 @@ function load_main(callback) {
 									"<p class='flow-text'>" + content + "</p>" +
 								"</div>" +
 								"<div class='card-action'>" +
-									"<a href='#' class='to_blog valign-wrapper'><span>Read More</span><i class='medium material-icons'>trending_flat</i></a>" +
+									"<a href='#' class='to_blog valign-wrapper'><span class='flow-text'>Read More</span><i class='medium material-icons'>trending_flat</i></a>" +
 								"</div>" +
 							"</div>";
 			$(home_html).find('#latest_blog').append(blog_str);
