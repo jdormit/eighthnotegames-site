@@ -29,6 +29,14 @@ $(document).ready(function() {
 			$('#main-content').html(data);
 		});
 	});	
+	
+	$(document).on('click', '.to_blog', function (event) {
+		event.preventDefault();
+		$('#main-content').empty();
+		load_blog(function (blog_html) {
+			$('#main-content').html(blog_html);
+		});
+	});
 });
 
 function load_blog(callback) {
@@ -89,6 +97,27 @@ function load_blog(callback) {
 function load_main(callback) {
 	$.get('/html/home.html', function(home) {
 		var home_html = $(home);
+		//get news
+		$.get('/html/news.html', function(news) {
+			$(home_html).find('#news_div').append(news);
+		});
+		//get latest blog post
+		var post_url = 'http://eighthnotegames.blogspot.com/feeds/posts/default?max-results=1&alt=json&callback=?';
+		$.getJSON(post_url, function(post) {
+			var title = post.feed.entry[0].title.$t;
+			var content = (post.feed.entry[0].content.$t).split("<a name='more'></a>")[0];
+			var blog_str =  "<div class='card green darken-1'>" +
+								"<div class='card-content'>" +
+									"<span class='card-title'><b>" + title + "</b>	</span>" +
+									"<p class='flow-text'>" + content + "</p>" +
+								"</div>" +
+								"<div class='card-action'>" +
+									"<a href='#' class='to_blog valign-wrapper'><span>Read More</span><i class='medium material-icons'>trending_flat</i></a>" +
+								"</div>" +
+							"</div>";
+			$(home_html).find('#news_div').append(blog_str);
+		});
+		//get tweets
 		$.get('/tweets', function(tweet_results) {
 			var tweets_obj = JSON.parse(tweet_results);
 			for (tweet in tweets_obj) {

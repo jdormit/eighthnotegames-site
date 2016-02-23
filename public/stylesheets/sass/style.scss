@@ -14,6 +14,7 @@ $blue-grey-lighten-1: #78909c;
 $grey: 9e9e9e;
 $grey-darken-1: #757575;
 $grey-lighten-1: #bdbdbd;
+$amber: #ffc107;
 
 @mixin links($link, $visited, $hover) {
 	a:link {
@@ -63,5 +64,9 @@ main {
 	}
 	.about {
 		@include links($blue-darken-4, $grey-lighten-1, $orange-accent-3);
+	}
+	
+	.news {
+		@include links ($amber, $grey-lighten-1, $red);
 	}
 }

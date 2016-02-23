@@ -31,5 +31,11 @@ main .about a:visited {
   color: #bdbdbd; }
 main .about a:hover {
   color: #ff9100; }
+main .news a:link {
+  color: #ffc107; }
+main .news a:visited {
+  color: #bdbdbd; }
+main .news a:hover {
+  color: #f44336; }
 
 /*# sourceMappingURL=style.css.map */
