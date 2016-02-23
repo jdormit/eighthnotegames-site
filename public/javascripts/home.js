@@ -32,26 +32,56 @@ $(document).ready(function() {
 });
 
 function load_blog(callback) {
+	var get_comments = function(comments_json) {
+		var comments = {};
+		for (entry in comments_json.feed.entry) {
+			var com = comments_json.feed.entry[entry];
+			var post_id = (com['thr$in-reply-to'].ref).split("post-")[1];
+			if (!comments[post_id]) comments[post_id] = [];
+			comments[post_id].push(com);
+		}
+		for (post in comments) comments[post].reverse();
+		return comments;
+	};
 	var feed = 'http://eighthnotegames.blogspot.com/feeds/posts/default?alt=json&callback=?';
+	var comments_feed = 'http://eighthnotegames.blogspot.com/feeds/comments/default?alt=json&callback=?';
 	var blog_html = "";
 	$.getJSON(feed, function(json) {
-		var entries = json.feed.entry;
-		$.each(entries, function () {
-			var post = $(this);
-			console.log(post);
-			content = this.content.$t;
-			blog_html += "<div class='row blog section'>" +
-							"<div class='col s10 push-s1'>" +
-							//	"<div class='card green lighten-3'>" +
-							//		"<div>" +
-								"<h3>" + this.title.$t +"</h3>" +
-								"<p class='flow-text'>" + content + "</p>" +
-								"<div class='divider'></div>" +
-							//		"</div>" +
-							//	"</div>" +
+		var blog_id = (json.feed.id.$t).split("blog-")[1];
+		$.getJSON(comments_feed, function(comments_json) {
+			var comments = get_comments(comments_json); //this will parse the comments into an object that groups comments by post
+			var entries = json.feed.entry;
+			$.each(entries, function () {
+				var comment_str = "";
+				var post_id = (this.id.$t).split("post-")[1];
+				if (comments[post_id]) {
+					comment_str = "<h4 class='flow-text'>Comments:</h4>";
+					for (com in comments[post_id]) {
+						var comment = comments[post_id][com];
+						comment_str += "<div class='row'>" +
+											"<div class='col s12'>" +
+												"<div class='card red darken-1'>" +
+													"<div class='card-content white-text'>" +
+														"<span class='card-title'>" + comment.author[0].name.$t + "</span>" +
+														"<p>" + comment.content.$t + "</p>" +
+													"</div>" +
+												"</div>" +
+											"</div>" +
+										"</div>"
+					}
+				}
+				content = this.content.$t;
+				blog_html += "<div class='row blog section'>" +
+								"<div class='col s10 push-s1'>" +
+									"<h3>" + this.title.$t +"</h3>" +
+									"<p class='flow-text'>" + content + "</p>" +
+									"<a class='btn' href='" + this.link[4].href + "#comment-form'>Post a Comment</a>" +
+									comment_str +
+								"</div>" +
 							"</div>" +
-						"</div>";
-			callback(blog_html);
+							"<div class='divider'></div>";
+				callback(blog_html);
+			});
 		});
 	});
 }
