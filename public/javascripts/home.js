@@ -115,7 +115,7 @@ function load_main(callback) {
 									"<a href='#' class='to_blog valign-wrapper'><span>Read More</span><i class='medium material-icons'>trending_flat</i></a>" +
 								"</div>" +
 							"</div>";
-			$(home_html).find('#news_div').append(blog_str);
+			$(home_html).find('#latest_blog').append(blog_str);
 		});
 		//get tweets
 		$.get('/tweets', function(tweet_results) {
