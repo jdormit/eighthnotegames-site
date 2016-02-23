@@ -62,6 +62,7 @@ function load_blog(callback) {
 			$.each(entries, function () {
 				var comment_str = "";
 				var post_id = (this.id.$t).split("post-")[1];
+				var date = parse_blogger_date(this.published.$t);
 				if (comments[post_id]) {
 					comment_str = "<h4 class='flow-text'>Comments:</h4>";
 					for (com in comments[post_id]) {
@@ -82,6 +83,7 @@ function load_blog(callback) {
 				blog_html += "<div class='row blog section'>" +
 								"<div class='col s10 push-s1'>" +
 									"<h3>" + this.title.$t +"</h3>" +
+									"<h4>" + date + "</h4>" +
 									"<p class='flow-text'>" + content + "</p>" +
 									"<a class='btn' href='" + this.link[4].href + "#comment-form'>Post a Comment</a>" +
 									comment_str +
@@ -106,9 +108,10 @@ function load_main(callback) {
 		$.getJSON(post_url, function(post) {
 			var title = post.feed.entry[0].title.$t;
 			var content = (post.feed.entry[0].content.$t).split("<a name='more'></a>")[0];
+			var date = parse_blogger_date(post.feed.entry[0].published.$t);
 			var blog_str =  "<div class='card green darken-1'>" +
 								"<div class='card-content'>" +
-									"<span class='card-title'><b>" + title + "</b>	</span>" +
+									"<span class='card-title'><b>" + title + "</b><span class='right'>" + date + "</span></span>" +
 									"<p class='flow-text'>" + content + "</p>" +
 								"</div>" +
 								"<div class='card-action'>" +
