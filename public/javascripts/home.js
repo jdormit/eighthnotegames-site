@@ -4,6 +4,7 @@ $(document).ready(function() {
 	load_main(function (result) {
 		$('#main-content').empty();
 		$('#main-content').html(result);
+		$('.slider').slider({full_width: true});
 	});
 	
 	$(".blog").click(function(event) {
@@ -119,6 +120,10 @@ function load_main(callback) {
 								"</div>" +
 							"</div>";
 			$(home_html).find('#latest_blog').append(blog_str);
+		});
+		//get interesting stuff
+		$.get('/html/interesting.html', function(data) {
+			$(home_html).find('#interesting_stuff').append(data);	
 		});
 		//get tweets
 		$.get('/tweets', function(tweet_results) {
