@@ -19,9 +19,10 @@ router.get('/', function(req, res, next) {
 });
 
 /* GET twitter feed. */
-router.get('/tweets', function (req, res, next) {
-	console.log('getting tweets');
-	twitter.getUserTimeline({screen_name: 'eighthnotegames', count: '4'}, twitterError, function(tweets) {
+router.get('/tweets/:username/:count', function (req, res, next) {
+	var user = String(req.params.username);
+	var tweet_count = parseInt(req.params.count);
+	twitter.getUserTimeline({screen_name: user, count: tweet_count}, twitterError, function(tweets) {
 		res.json(tweets);
 	});
 });

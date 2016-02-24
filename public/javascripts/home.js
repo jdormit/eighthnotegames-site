@@ -126,7 +126,7 @@ function load_main(callback) {
 			$(home_html).find('#interesting_stuff').append(data);	
 		});
 		//get tweets
-		$.get('/tweets', function(tweet_results) {
+		$.get('/tweets/eighthnotegames/3', function(tweet_results) {
 			var tweets_obj = JSON.parse(tweet_results);
 			for (tweet in tweets_obj) {
 				var img_string = "";
