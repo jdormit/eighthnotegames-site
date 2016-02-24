@@ -70,7 +70,7 @@ function load_blog(callback) {
 						var comment = comments[post_id][com];
 						comment_str += "<div class='row'>" +
 											"<div class='col s12'>" +
-												"<div class='card red darken-1'>" +
+												"<div class='card grey lighten-1'>" +
 													"<div class='card-content white-text'>" +
 														"<span class='card-title'>" + comment.author[0].name.$t + "</span>" +
 														"<p>" + comment.content.$t + "</p>" +
@@ -82,10 +82,10 @@ function load_blog(callback) {
 				}
 				content = this.content.$t;
 				blog_html += "<div class='row blog section'>" +
-								"<div class='col s10 push-s1'>" +
+								"<div class='col s10 push-s1 flow-text'>" +
 									"<h3>" + this.title.$t +"</h3>" +
 									"<h4>" + date + "</h4>" +
-									"<p class='flow-text'>" + content + "</p>" +
+									"<p>" + content + "</p>" +
 									"<a class='btn' href='" + this.link[4].href + "#comment-form'>Post a Comment</a>" +
 									comment_str +
 								"</div>" +
