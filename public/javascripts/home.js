@@ -71,7 +71,7 @@ function load_blog(callback) {
 						comment_str += "<div class='row'>" +
 											"<div class='col s12'>" +
 												"<div class='card grey lighten-1'>" +
-													"<div class='card-content white-text'>" +
+													"<div class='card-content black-text'>" +
 														"<span class='card-title'>" + comment.author[0].name.$t + "</span>" +
 														"<p>" + comment.content.$t + "</p>" +
 													"</div>" +
