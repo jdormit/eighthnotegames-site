@@ -110,7 +110,7 @@ function load_main(callback) {
 			var title = post.feed.entry[0].title.$t;
 			var content = (post.feed.entry[0].content.$t).split("<a name='more'></a>")[0];
 			var date = parse_blogger_date(post.feed.entry[0].published.$t);
-			var blog_str =  "<div class='card green darken-1'>" +
+			var blog_str =  "<div class='card blue-grey'>" +
 								"<div class='card-content'>" +
 									"<span class='card-title'><b>" + title + "</b><span class='right'>" + date + "</span></span>" +
 									"<p class='flow-text'>" + content + "</p>" +
