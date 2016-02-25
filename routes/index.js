@@ -15,7 +15,19 @@ var twitterError = function(err, response, body) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	res.render('index', { title: 'Eighth Note Games' });
+	res.render('index', { title: 'Eighth Note Games', page: '"main"'});
+});
+
+router.get('/blog', function(req, res, next) {
+	res.render('index', { title: 'Eighth Note Games', page: '"blog"'});
+});
+
+router.get('/projects', function(req, res, next) {
+	res.render('index', { title: 'Eighth Note Games', page: '"projects"'});
+});
+
+router.get('/about', function(req, res, next) {
+	res.render('index', { title: 'Eighth Note Games', page: '"about"'});
 });
 
 /* GET twitter feed. */

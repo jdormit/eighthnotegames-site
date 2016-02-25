@@ -1,44 +1,35 @@
-$(document).ready(function() {
-	$(".button-collapse").sideNav();
-	
-	load_main(function (result) {
-		$('#main-content').empty();
-		$('#main-content').html(result);
-		$('.slider').slider({full_width: true});
-		$('.tooltipped').tooltip({delay:50});
-	});
-	
-	$(".blog").click(function(event) {
-		event.preventDefault();
+function load_page() {
+	if (page == 'main') {
+		load_main(function (result) {
+			$('#main-content').empty();
+			$('#main-content').html(result);
+			$('.slider').slider({full_width: true});
+			$('.tooltipped').tooltip({delay:50});
+		});
+	}
+	else if (page == 'blog') {
 		$('#main-content').empty();
 		load_blog(function (blog_html) {
 			$('#main-content').html(blog_html);
-		});
-	});
-	
-	$(".projects").click(function(event) {
-		event.preventDefault();
+		});	
+	}
+	else if (page == 'projects') {
 		$('#main-content').empty();
 		load_projects(function (data){
 			$('#main-content').html(data);
-		});
-	});
-	
-	$(".about").click(function(event) {
-		event.preventDefault();
+		});		
+	}
+	else if (page == 'about') {
 		$('#main-content').empty();
 		load_about(function(data) {
 			$('#main-content').html(data);
-		});
-	});	
-	
-	$(document).on('click', '.to_blog', function (event) {
-		event.preventDefault();
-		$('#main-content').empty();
-		load_blog(function (blog_html) {
-			$('#main-content').html(blog_html);
-		});
-	});
+		});		
+	}
+}
+
+$(document).ready(function() {
+	$(".button-collapse").sideNav();	
+	load_page();
 });
 
 function load_blog(callback) {
