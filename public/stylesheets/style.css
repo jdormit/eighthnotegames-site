@@ -35,6 +35,12 @@ main {
     color: #9FA8DA; }
   main a:hover {
     color: #FF5252; }
+  main .home .tooltipped a:link {
+    color: #FFFFFF; }
+  main .home .tooltipped a:visited {
+    color: #FFFFFF; }
+  main .home .tooltipped a:hover {
+    color: #FFFFFF; }
   main .home .tooltipped:hover {
     background-color: #6b6b6b; }
   main .blog .btn {

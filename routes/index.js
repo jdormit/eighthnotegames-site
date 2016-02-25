@@ -22,16 +22,8 @@ router.get('/', function(req, res, next) {
 router.get('/tweets/:username/:count', function (req, res, next) {
 	var user = String(req.params.username);
 	var tweet_count = parseInt(req.params.count);
-	twitter.getUserTimeline({screen_name: user, count: tweet_count}, twitterError, function(tweets) {
+	twitter.getUserTimeline({screen_name: user, count: tweet_count, exclude_replies: true}, twitterError, function(tweets) {
 		res.json(tweets);
-	});
-});
-
-/* POST twitter follow request */
-router.get('/twitter-follow/:username', function (req, res, next) {
-	var user = String(req.params.username);
-	twitter.postCreateFriendship({screen_name: user, follow: true}, twitterError, function(response) {
-		res.send(response);
 	});
 });
 

@@ -91,6 +91,7 @@ main {
 	
 	.home {
 		.tooltipped {
+			@include links ($white, $white, $white);
 			&:hover {
 				background-color: darken($grey-darken-1, 4%);
 			}
