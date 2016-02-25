@@ -3,6 +3,7 @@ html
 	head
 		title= title
 		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(href='https://fonts.googleapis.com/css?family=Sura' rel='stylesheet' type='text/css')
 		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css')
 		link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
 		block scripts
@@ -10,5 +11,7 @@ html
 			script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js')
 			script(src='javascripts/util.js')
 	body
-		div(class='container')
-			block content
+		div(class='background-wrapper z-depth-3')
+			block header
+			div(class='container')
+				block content

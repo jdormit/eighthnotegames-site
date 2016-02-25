@@ -1,41 +1,58 @@
+.background-wrapper {
+  margin-left: 7%;
+  margin-right: 7%;
+  padding-bottom: 25px;
+  background-color: #757575; }
+
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+  font: 14px "Sura", serif;
+  background-color: #C5CAE9; }
 
-h1 {
-  font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif; }
+.header {
+  color: #FFFFFF; }
+  .header .intro {
+    margin-bottom: 0;
+    background-color: #3F51B5; }
+  .header nav {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    background-color: #303F9F; }
+    .header nav img {
+      padding: 10px;
+      padding-top: 16px;
+      padding-left: 20px;
+      padding-bottom: 18px;
+      background-color: #303F9F; }
+      .header nav img:hover {
+        background-color: #2b398f; }
 
-header .intro {
-  margin-bottom: 0; }
-header nav {
-  padding: 0;
-  margin: 0;
-  text-align: center; }
-  header nav img {
-    padding: 10px;
-    padding-top: 16px;
-    padding-left: 20px;
-    padding-bottom: 18px;
-    background-color: #0d47a1; }
-    header nav img:hover {
-      background-color: #0b3f8e; }
-
-main .blog a:link {
-  color: #0d47a1; }
-main .blog a:visited {
-  color: #f44336; }
-main .blog a:hover {
-  color: #d500f9; }
-main .about a:link {
-  color: #0d47a1; }
-main .about a:visited {
-  color: #bdbdbd; }
-main .about a:hover {
-  color: #ff9100; }
-main .news a:link {
-  color: #ffc107; }
-main .news a:visited {
-  color: #0d47a1; }
-main .news a:hover {
-  color: #f44336; }
+main {
+  color: #FFFFFF; }
+  main a:link {
+    color: #7986CB; }
+  main a:visited {
+    color: #9FA8DA; }
+  main a:hover {
+    color: #FF5252; }
+  main .home .tooltipped:hover {
+    background-color: #6b6b6b; }
+  main .blog .btn {
+    background-color: #3F51B5; }
+  main .about .about-card {
+    background-color: #303F9F;
+    color: #FFFFFF; }
+  main .tweets {
+    background-color: #3F51B5;
+    color: #FFFFFF; }
+  main .news .news-content {
+    color: #000000;
+    background-color: #C5CAE9; }
+  main .projects .card {
+    background-color: #C5CAE9;
+    color: #000000; }
+  main .projects .card-reveal {
+    background-color: #3F51B5;
+    color: #FFFFFF; }
 
 /*# sourceMappingURL=style.css.map */

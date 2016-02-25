@@ -3,31 +3,33 @@ extends layout
 block append scripts
 	script(src='./javascripts/home.js')
 
-block append content
-	header
-		div(class='row intro blue darken-2 valign-wrapper')
+block header
+	div(class='header')
+		div(class='row intro valign-wrapper')
 			div(class='col s3 m2')
 				img(class='responsive-img' src='/images/hunter_pixel.png')			
 			div(class='col s10')
 				h1= title
 		div(class='row')
-			nav(class='blue darken-4')
+			nav
 				div(class='nav-wrapper col s12')
 					a(href='#' data-activates='mobile-nav' class='button-collapse'): i(class='material-icons') menu
 					ul(class='hide-on-med-and-down')
-						li(class='col s1 home'): a(href='/'): i(class='material-icons') store
-						li(class='col s3 blog'): a(href='/blog') Blog
-						li(class='col s3 projects'): a(href='/projects') Projects
-						li(class='col s3 about'): a(href='/about') About
+						li(class='col s1'): a(href='/'): i(class='material-icons') store
+						li(class='col s3'): a(href='/blog') Blog
+						li(class='col s3'): a(href='/projects') Projects
+						li(class='col s3'): a(href='/about') About
 					div(class='col s2 valign-wrapper hide-on-med-and-down')
 						a(href='https://www.twitter.com/eighthnotegames' target='_blank'): img(class='responsive-img' src='/images/TwitterLogo.png')
 						a(href='https://www.facebook.com/eighthnotegames' target='_blank'): img(class='responsive-img' src='/images/fb_logo.png')
 						a(href='https://www.linkedin.com/in/jeremydormitzer' target='_blank'): img(class='responsive-img' src='/images/linkedin_logo.png')
 					ul(class='side-nav' id='mobile-nav')
-						li(class='home'): a(href='/'): i(class='material-icons') store
-						li(class='blog'): a(href='/blog') Blog
-						li(class='projects'): a(href='/projects') Projects
-						li(class='about'): a(href='/about') About
+						li: a(href='/'): i(class='material-icons') store
+						li: a(href='/blog') Blog
+						li: a(href='/projects') Projects
+						li: a(href='/about') About
+	
+block append content
 	main
 		div#main-content
 		

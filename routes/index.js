@@ -10,7 +10,7 @@ var twitter_config = {
 
 var twitter = new Twitter(twitter_config);
 var twitterError = function(err, response, body) {
-	console.log('Twitter Error: ' + err);
+	console.log('Twitter Error: ' + JSON.stringify(err));
 };
 
 /* GET home page. */
@@ -24,6 +24,14 @@ router.get('/tweets/:username/:count', function (req, res, next) {
 	var tweet_count = parseInt(req.params.count);
 	twitter.getUserTimeline({screen_name: user, count: tweet_count}, twitterError, function(tweets) {
 		res.json(tweets);
+	});
+});
+
+/* POST twitter follow request */
+router.get('/twitter-follow/:username', function (req, res, next) {
+	var user = String(req.params.username);
+	twitter.postCreateFriendship({screen_name: user, follow: true}, twitterError, function(response) {
+		res.send(response);
 	});
 });
 

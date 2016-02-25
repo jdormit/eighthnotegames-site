@@ -5,6 +5,7 @@ $(document).ready(function() {
 		$('#main-content').empty();
 		$('#main-content').html(result);
 		$('.slider').slider({full_width: true});
+		$('.tooltipped').tooltip({delay:50});
 	});
 	
 	$(".blog").click(function(event) {
@@ -110,7 +111,7 @@ function load_main(callback) {
 			var title = post.feed.entry[0].title.$t;
 			var content = (post.feed.entry[0].content.$t).split("<a name='more'></a>")[0];
 			var date = parse_blogger_date(post.feed.entry[0].published.$t);
-			var blog_str =  "<div class='card grey'>" +
+			var blog_str =  "<div class='card news-content'>" +
 								"<div class='card-content'>" +
 									"<span class='card-title'><b>" + title + "</b><span class='right'>" + date + "</span></span>" +
 									"<p class='flow-text'>" + content + "</p>" +
@@ -138,10 +139,10 @@ function load_main(callback) {
 				}
 				$(home_html).find('#tweets').append(
 					"<a href='" + tweet_url + "' target='_blank'>" +
-						"<div class='card hoverable red darken-1'>" +
+						"<div class='card hoverable tweets'>" +
 							img_string +
 							"<div class='card-content'>" +
-								"<p class='white-text'>" + tweets_obj[tweet].text + "</p>" +
+								"<p>" + tweets_obj[tweet].text + "</p>" +
 							"</div>" +
 						"</div>" +
 					"</a>"
@@ -161,5 +162,11 @@ function load_projects(callback) {
 function load_about(callback) {
 	$.get('/html/about.html', function(data) {
 		callback(data);
+	});
+}
+
+function twitterFollow(username) { //this is called by home.html
+	$.get('./twitter-follow/' + username, function(response) {
+		console.log(response);
 	});
 }

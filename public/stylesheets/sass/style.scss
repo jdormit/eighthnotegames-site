@@ -1,14 +1,18 @@
 $blue-darken-4: #0d47a1;
 $green-lighten-3: #a5d6a7;
 $amber: #ffc107;
+$black: #000000;
 $blue-grey-lighten-1: #78909c;
 $blue-grey-lighten-2: #90a4ae;
 $blue-grey-lighten-3: #b0bec5;
 $blue-grey: #607d8b;
 $blue: #2196f3;
 $green-lighten-2: #81c784;
+$green-lighten-5: #e8f5e9;
 $grey-darken-1: #757575;
+$grey-darken-4: #212121;
 $grey-lighten-1: #bdbdbd;
+$grey-lighten-2: #e0e0e0;
 $grey: 9e9e9e;
 $light-blue: #03a9f4;
 $orange-accent-3: #ff9100;
@@ -16,6 +20,17 @@ $orange-accent-4: #ff6d00;
 $purple-accent-3: #d500f9;
 $red: #f44336;
 $teal: #009688;
+$indigo-accent-1: #8c9eff;
+$white: #FFFFFF;
+
+$dark-primary-color: #303F9F;
+$primary-color: #3F51B5;
+$light-primary-color: #C5CAE9;
+$text-icons: #FFFFFF;
+$accent-color: #FF5252;
+$primary-text: #212121;
+$secondary-text: #727272;
+$divider-color: #B6B6B6;
 
 @mixin links($link, $visited, $hover) {
 	a:link {
@@ -29,49 +44,92 @@ $teal: #009688;
 	}
 }
 
-.container {
-
+.background-wrapper {
+	margin-left: 7%;
+	margin-right: 7%;
+	padding-bottom: 25px;
+	background-color: $grey-darken-1;
 }
 
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Sura", serif;
+  background-color: $light-primary-color;
 }
 
 h1 {
-	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+//	font-family: 'Palatino Linotype', 'Book Antiqua’, Palatino, serif;
 }
 
-header {
+.header {
+	color: $white;
 	.intro {
 		margin-bottom: 0;
+		background-color: $primary-color;
 	}
 	nav {
+	//	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
 		padding: 0;
 		margin: 0;
 		text-align: center;
-		
+		background-color: $dark-primary-color;
 		img {
 			padding: 10px;
 			padding-top: 16px;
 			padding-left: 20px;
 			padding-bottom: 18px;
-			background-color: $blue-darken-4;
+			background-color: $dark-primary-color;
 			&:hover {
-				background-color: darken($blue-darken-4, 4%);
+				background-color: darken($dark-primary-color, 4%);
 			}
 		}
 	}
 }
 
 main {
-	.blog {
-		@include links($blue-darken-4, $red, $purple-accent-3);
+	@include links (#7986CB, #9FA8DA, $accent-color);
+	color: $white;
+	
+	.home {
+		.tooltipped {
+			&:hover {
+				background-color: darken($grey-darken-1, 4%);
+			}
+		}
 	}
+	
+	.blog {
+		.btn {
+			background-color: $primary-color;
+		}		
+	}
+	
 	.about {
-		@include links($blue-darken-4, $grey-lighten-1, $orange-accent-3);
+		.about-card {
+			background-color: $dark-primary-color;
+			color: $white;
+		}
+	}
+	
+	.tweets {
+		background-color: $primary-color;
+		color: $white;
 	}
 	
 	.news {
-		@include links ($amber, $blue-darken-4, $red);
+		.news-content {
+			color: $black;
+			background-color: $light-primary-color;
+		}
+	}
+	
+	.projects {
+		.card {
+			background-color: $light-primary-color;
+			color: $black;
+		}
+		.card-reveal {
+			background-color: $primary-color;
+			color: $white;
+		}
 	}
 }
