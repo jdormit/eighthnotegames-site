@@ -23,7 +23,8 @@ function load_page() {
 				menuWidth: 400,
 				closeOnClick: true
 			});
-			$('.tooltipped').tooltip({delay: 50});
+			if (window.matchMedia("(min-width: 400px)").matches)
+				$('.tooltipped').tooltip({delay: 50});
 			var dropdown_pos = $('#timeline-button').offset().top;
 			$(window).scroll(function() {
 				var margin_left = '47px';
