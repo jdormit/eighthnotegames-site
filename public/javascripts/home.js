@@ -11,6 +11,41 @@ function load_page() {
 		$('#main-content').empty();
 		load_blog(function (blog_html) {
 			$('#main-content').html(blog_html);
+			var margin_left = '47px';
+			if ($(window).width() < 992)	margin_left = '2%';
+			$('#timeline-button').css({
+				position: 'absolute',
+				"margin-top": '25px',
+				"margin-left": margin_left,
+				"top": "auto"
+			});
+			$('.button-collapse').sideNav({
+				menuWidth: 400,
+				closeOnClick: true
+			});
+			$('.tooltipped').tooltip({delay: 50});
+			var dropdown_pos = $('#timeline-button').offset().top;
+			$(window).scroll(function() {
+				var margin_left = '47px';
+				if ($(window).width() < 992) {
+					margin_left = '2%';
+				}
+				var current_scroll = $(window).scrollTop();
+				if (current_scroll >= dropdown_pos) {
+					$('#timeline-button').css({
+						position: 'fixed',
+						top: '7px',
+					});
+				}
+				else {
+					$('#timeline-button').css({
+						position: 'absolute',
+						"margin-top": '25px',
+						"margin-left": margin_left,
+						"top": "auto"
+					});
+				}
+			});
 		});	
 	}
 	else if (page == 'projects') {
@@ -28,7 +63,10 @@ function load_page() {
 }
 
 $(document).ready(function() {
-	$(".button-collapse").sideNav();	
+	$(".button-collapse").sideNav({
+		menuWidth: 400,
+		closeOnClick: true
+	});	
 	load_page();
 });
 
@@ -47,43 +85,97 @@ function load_blog(callback) {
 	var feed = 'http://eighthnotegames.blogspot.com/feeds/posts/default?alt=json&callback=?';
 	var comments_feed = 'http://eighthnotegames.blogspot.com/feeds/comments/default?alt=json&callback=?';
 	var blog_html = "";
-	$.getJSON(feed, function(json) {
-		var blog_id = (json.feed.id.$t).split("blog-")[1];
-		$.getJSON(comments_feed, function(comments_json) {
-			var comments = get_comments(comments_json); //this will parse the comments into an object that groups comments by post
-			var entries = json.feed.entry;
-			$.each(entries, function () {
-				var comment_str = "";
-				var post_id = (this.id.$t).split("post-")[1];
-				var date = parse_blogger_date(this.published.$t);
-				if (comments[post_id]) {
-					comment_str = "<h4 class='flow-text'>Comments:</h4>";
-					for (com in comments[post_id]) {
-						var comment = comments[post_id][com];
-						comment_str += "<div class='row'>" +
-											"<div class='col s12'>" +
-												"<div class='card grey lighten-1'>" +
-													"<div class='card-content black-text'>" +
-														"<span class='card-title'>" + comment.author[0].name.$t + "</span>" +
-														"<p>" + comment.content.$t + "</p>" +
+	var timeline_date = {};
+	$.get('/html/blog.html', function(blog) {
+		var blog_page = $(blog);
+		$.getJSON(feed, function(json) {
+			var blog_id = (json.feed.id.$t).split("blog-")[1];
+			$.getJSON(comments_feed, function(comments_json) {
+				var comments = get_comments(comments_json); //this will parse the comments into an object that groups comments by post
+				var entries = json.feed.entry;
+				$.each(entries, function () {
+					var comment_str = "";
+					var post_id = (this.id.$t).split("post-")[1];
+					var date = parse_blogger_date(this.published.$t);
+					if (timeline_date[date.date.year]) {
+						if (timeline_date[date.date.year][date.date.month]) {
+						timeline_date[date.date.year][date.date.month].push({title: this.title.$t, day: date.date.day});
+						}
+						else {
+							timeline_date[date.date.year][date.date.month] = [];
+							timeline_date[date.date.year][date.date.month].push({title: this.title.$t, day: date.date.day});
+							if (!timeline_date[date.date.year].months_order) {
+								timeline_date[date.date.year].months_order = [];
+							}
+							timeline_date[date.date.year].months_order.push(date.date.month);
+						}
+					} else {
+						timeline_date[date.date.year] = {};
+						timeline_date[date.date.year][date.date.month] = [];
+						timeline_date[date.date.year][date.date.month].push({title: this.title.$t, day: date.date.day});
+						if (!timeline_date.years_order) {
+							timeline_date.years_order = [];
+						}
+						timeline_date.years_order.push(date.date.year);
+						if (!timeline_date[date.date.year].months_order) {
+								timeline_date[date.date.year].months_order = [];
+							}
+							timeline_date[date.date.year].months_order.push(date.date.month);
+					}
+					if (comments[post_id]) {
+						comment_str = "<h4 class='flow-text'>Comments:</h4>";
+						for (com in comments[post_id]) {
+							var comment = comments[post_id][com];
+							comment_str += "<div class='row'>" +
+												"<div class='col s12'>" +
+													"<div class='card grey lighten-1'>" +
+														"<div class='card-content black-text'>" +
+															"<span class='card-title'>" + comment.author[0].name.$t + "</span>" +
+															"<p>" + comment.content.$t + "</p>" +
+														"</div>" +
 													"</div>" +
 												"</div>" +
-											"</div>" +
-										"</div>"
+											"</div>"
+						}
+					}
+					content = this.content.$t;
+					blog_html += "<a name='" + parse_title_as_anchor(this.title.$t) + "'><div class='row section'></a>" +
+									"<div class='col s10 push-s1 flow-text'>" +
+										"<h3>" + this.title.$t +"</h3>" +
+										"<h4>" + date.date_str + "</h4>" +
+										"<p>" + content + "</p>" +
+										"<a class='btn' href='" + this.link[4].href + "#comment-form'>Post a Comment</a>" +
+										comment_str +
+									"</div>" +
+								"</div>" +
+								"<div class='divider'></div>";
+				});
+				$(blog_page).find('#posts').append(blog_html);
+				
+				//construct timeline
+				timeline_date.years_order.sort(function(a,b){return b - a}); //sort years array
+				console.log(timeline_date);
+				var timeline_html = "<ul class='side-nav' id='timeline-dropdown'>";
+				for (year in timeline_date.years_order) {
+					var ordered_year = timeline_date.years_order[year];
+					timeline_date[ordered_year].months_order.sort(function(a,b){return b - a});
+					for (month in timeline_date[ordered_year].months_order) {
+						var ordered_month = timeline_date[ordered_year].months_order[month];
+						for (post in timeline_date[ordered_year][ordered_month]) {
+							timeline_html += "<li><a href='#" + parse_title_as_anchor(timeline_date[ordered_year][ordered_month][post].title) + "'><span class='truncate'>" + months[ordered_month] + 
+							" " + timeline_date[ordered_year][ordered_month][post].day + ", " + ordered_year + ": " + timeline_date[ordered_year][ordered_month][post].title + 
+							"</span></a></li>"
+						}
+						timeline_html += "<li class='divider'></li>";
 					}
 				}
-				content = this.content.$t;
-				blog_html += "<div class='row blog section'>" +
-								"<div class='col s10 push-s1 flow-text'>" +
-									"<h3>" + this.title.$t +"</h3>" +
-									"<h4>" + date + "</h4>" +
-									"<p>" + content + "</p>" +
-									"<a class='btn' href='" + this.link[4].href + "#comment-form'>Post a Comment</a>" +
-									comment_str +
-								"</div>" +
-							"</div>" +
-							"<div class='divider'></div>";
-				callback(blog_html);
+				timeline_html += '</ul>';
+				$("<div class='left' id='sidebar'></div>").insertBefore($('.container'));
+				$('#sidebar').append($("<a class='button-collapse btn-floating btn-large tooltipped' " +
+				"id='timeline-button' href='#' data-position='right' date-delay='50' data-tooltip='Blog Archive' data-activates='timeline-dropdown'>" +
+										"<i class='material-icons left'>list</i></a>"));
+				$('#sidebar').append(timeline_html);
+				callback(blog_page);
 			});
 		});
 	});

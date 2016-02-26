@@ -27,6 +27,9 @@ body {
       .header nav img:hover {
         background-color: #2b398f; }
 
+#timeline-button {
+  background-color: #303F9F; }
+
 main {
   color: #FFFFFF; }
   main a:link {
@@ -45,6 +48,9 @@ main {
     background-color: #6b6b6b; }
   main .blog .btn {
     background-color: #3F51B5; }
+  main .blog .collapsible {
+    background-color: #C5CAE9;
+    color: #000000; }
   main .about .about-card {
     background-color: #303F9F;
     color: #FFFFFF; }

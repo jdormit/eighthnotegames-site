@@ -84,6 +84,10 @@ h1 {
 	}
 }
 
+#timeline-button { //this is the timeline dropdown button on the blog page. it should probably go elsewhere in this document
+	background-color: $dark-primary-color;
+}
+
 main {
 	@include links (#7986CB, #9FA8DA, $accent-color);
 	color: $white;
@@ -100,7 +104,11 @@ main {
 	.blog {
 		.btn {
 			background-color: $primary-color;
-		}		
+		}
+		.collapsible {
+			background-color: $light-primary-color;
+			color: $black;
+		}
 	}
 	
 	.about {
