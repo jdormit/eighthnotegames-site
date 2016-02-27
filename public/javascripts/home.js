@@ -197,7 +197,7 @@ function load_main(callback) {
 			var date = parse_blogger_date(post.feed.entry[0].published.$t);
 			var blog_str =  "<div class='card news-content'>" +
 								"<div class='card-content'>" +
-									"<span class='card-title'><b>" + title + "</b><span class='right'>" + date + "</span></span>" +
+									"<span class='card-title'><b>" + title + "</b><span class='right'>" + date.date_str + "</span></span>" +
 									"<p class='flow-text'>" + content + "</p>" +
 								"</div>" +
 								"<div class='card-action'>" +
