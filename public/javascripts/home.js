@@ -47,6 +47,8 @@ function load_page() {
 					});
 				}
 			});
+		var hash_id = window.location.hash.substr(1, window.location.hash.length);
+		document.getElementsByName(hash_id)[0].scrollIntoView();			
 		});	
 	}
 	else if (page == 'projects') {
@@ -126,7 +128,6 @@ function load_blog(callback) {
 					if (comments[post_id]) {
 						comment_str = "<h4 class='flow-text'>Comments:</h4>";
 						for (com in comments[post_id]) {
-							console.log(com);
 							var comment = comments[post_id][com];
 							comment_str += "<div class='row'>" +
 												"<div class='col s12'>" +
