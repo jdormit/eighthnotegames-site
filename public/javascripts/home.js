@@ -48,7 +48,8 @@ function load_page() {
 				}
 			});
 		var hash_id = window.location.hash.substr(1, window.location.hash.length);
-		document.getElementsByName(hash_id)[0].scrollIntoView();			
+		if (typeof document.getElementsByName(hash_id)[0] !== 'undefined')
+			document.getElementsByName(hash_id)[0].scrollIntoView();			
 		});	
 	}
 	else if (page == 'projects') {
@@ -94,6 +95,7 @@ function load_blog(callback) {
 		$.getJSON(feed, function(json) {
 			var blog_id = (json.feed.id.$t).split("blog-")[1];
 			$.getJSON(comments_feed, function(comments_json) {
+				console.log(comments_json);
 				var comments = get_comments(comments_json); //this will parse the comments into an object that groups comments by post
 				var entries = json.feed.entry;
 				$.each(entries, function () {
@@ -126,6 +128,7 @@ function load_blog(callback) {
 							timeline_date[date.date.year].months_order.push(date.date.month);
 					}
 					if (comments[post_id]) {
+						console.log(comments[post_id]);
 						comment_str = "<h4 class='flow-text'>Comments:</h4>";
 						for (com in comments[post_id]) {
 							var comment = comments[post_id][com];
@@ -157,7 +160,6 @@ function load_blog(callback) {
 				
 				//construct timeline
 				timeline_date.years_order.sort(function(a,b){return b - a}); //sort years array
-				console.log(timeline_date);
 				var timeline_html = "<ul class='side-nav' id='timeline-dropdown'>";
 				for (year in timeline_date.years_order) {
 					var ordered_year = timeline_date.years_order[year];
