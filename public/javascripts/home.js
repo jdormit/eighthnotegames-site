@@ -95,7 +95,6 @@ function load_blog(callback) {
 		$.getJSON(feed, function(json) {
 			var blog_id = (json.feed.id.$t).split("blog-")[1];
 			$.getJSON(comments_feed, function(comments_json) {
-				console.log(comments_json);
 				var comments = get_comments(comments_json); //this will parse the comments into an object that groups comments by post
 				var entries = json.feed.entry;
 				$.each(entries, function () {
@@ -128,7 +127,6 @@ function load_blog(callback) {
 							timeline_date[date.date.year].months_order.push(date.date.month);
 					}
 					if (comments[post_id]) {
-						console.log(comments[post_id]);
 						comment_str = "<h4 class='flow-text'>Comments:</h4>";
 						for (com in comments[post_id]) {
 							var comment = comments[post_id][com];
@@ -256,6 +254,5 @@ function load_about(callback) {
 
 function twitterFollow(username) { //this is called by home.html
 	$.get('./twitter-follow/' + username, function(response) {
-		console.log(response);
 	});
 }
