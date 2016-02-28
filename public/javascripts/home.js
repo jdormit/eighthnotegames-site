@@ -126,6 +126,7 @@ function load_blog(callback) {
 					if (comments[post_id]) {
 						comment_str = "<h4 class='flow-text'>Comments:</h4>";
 						for (com in comments[post_id]) {
+							console.log(com);
 							var comment = comments[post_id][com];
 							comment_str += "<div class='row'>" +
 												"<div class='col s12'>" +
@@ -193,6 +194,7 @@ function load_main(callback) {
 		var post_url = 'http://eighthnotegames.blogspot.com/feeds/posts/default?max-results=1&alt=json&callback=?';
 		$.getJSON(post_url, function(post) {
 			var title = post.feed.entry[0].title.$t;
+			var title_str = parse_title_as_anchor(title);
 			var content = (post.feed.entry[0].content.$t).split("<a name='more'></a>")[0];
 			var date = parse_blogger_date(post.feed.entry[0].published.$t);
 			var blog_str =  "<div class='card news-content'>" +
@@ -201,7 +203,7 @@ function load_main(callback) {
 									"<p class='flow-text'>" + content + "</p>" +
 								"</div>" +
 								"<div class='card-action'>" +
-									"<a href='#' class='to_blog valign-wrapper'><span class='flow-text'>Read More</span><i class='medium material-icons'>trending_flat</i></a>" +
+									"<a href='/blog#" + title_str + "' class='to_blog valign-wrapper'><span class='flow-text'>Read More</span><i class='medium material-icons'>trending_flat</i></a>" +
 								"</div>" +
 							"</div>";
 			$(home_html).find('#latest_blog').append(blog_str);
