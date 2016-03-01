@@ -4,7 +4,8 @@ function load_page() {
 			$('#main-content').empty();
 			$('#main-content').html(result);
 			$('.slider').slider({full_width: true});
-			$('.tooltipped').tooltip({delay:50});
+			if (window.matchMedia("(min-device-width: 900px)").matches)
+				$('.tooltipped').tooltip({delay:50});
 		});
 	}
 	else if (page == 'blog') {
@@ -220,7 +221,7 @@ function load_main(callback) {
 			//	console.log(tweets_obj[tweet]);
 				var img_string = "";
 				var tweet_url = "https://twitter.com/" + tweets_obj[tweet].user.id_str + "/status/" + tweets_obj[tweet].id_str;
-				if (tweets_obj[tweet].extended_entities.media[0].video_info) {//there is a video/gif 
+				if (tweets_obj[tweet].extended_entities.media[0].video_info && window.matchMedia("(min-device-width: 900px)").matches) {//there is a video/gif 
 					img_string= "<div class='card-image'>" +
 									"<video class='responsive-video' autoplay loop>" +
 										"<source src='" + tweets_obj[tweet].extended_entities.media[0].video_info.variants[0].url + "'" +
