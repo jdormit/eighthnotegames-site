@@ -222,7 +222,7 @@ function load_main(callback) {
 				var img_string = "";
 				var tweet_url = "https://twitter.com/" + tweets_obj[tweet].user.id_str + "/status/" + tweets_obj[tweet].id_str;
 				if (tweets_obj[tweet].extended_entities.media[0].video_info && window.matchMedia("(min-device-width: 900px)").matches) {//there is a video/gif 
-					img_string= "<div class='card-image'>" +
+					img_string= "<div class='card-image center-align'>" +
 									"<video class='responsive-video' autoplay loop>" +
 										"<source src='" + tweets_obj[tweet].extended_entities.media[0].video_info.variants[0].url + "'" +
 										"type='video/mp4'>" +
