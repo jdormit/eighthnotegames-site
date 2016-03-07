@@ -44,6 +44,12 @@ $divider-color: #B6B6B6;
 	}
 }
 
+@media max-device-width: 600px {
+	#mobile-nav {
+		width: 50%;
+	}
+}
+
 .background-wrapper {
 	margin-left: 7%;
 	margin-right: 7%;

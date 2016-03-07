@@ -18,6 +18,17 @@ router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Eighth Note Games', page: '"main"'});
 });
 
+// router.get('/blog/:post_id', function(req, res, next) {
+	// var post_id = String(req.params.post_id);
+// //	res.render('index', {title: 'Eighth Note Games', page: '"blog"', post_id: post_id});
+	// res.render('index', {title: 'Eighth Note Games', page: '"blog"'});
+// });
+
+// router.param('post_id', function(req, res, next) {
+	// res.post_id = req.post_id;
+	// next();
+// });
+
 router.get('/blog', function(req, res, next) {
 	res.render('index', { title: 'Eighth Note Games', page: '"blog"'});
 });

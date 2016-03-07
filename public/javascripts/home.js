@@ -9,49 +9,55 @@ function load_page() {
 		});
 	}
 	else if (page == 'blog') {
+		console.log('blog');
 		$('#main-content').empty();
-		load_blog(function (blog_html) {
-			$('#main-content').html(blog_html);
-			var margin_left = '47px';
-			if ($(window).width() < 992)	margin_left = '2%';
-			$('#timeline-button').css({
-				position: 'absolute',
-				"margin-top": '25px',
-				"margin-left": margin_left,
-				"top": "auto"
-			});
-			$('.button-collapse').sideNav({
-				menuWidth: 400,
-				closeOnClick: true
-			});
-			if (window.matchMedia("(min-device-width: 900px)").matches)
-				$('.tooltipped').tooltip({delay: 50});
-			var dropdown_pos = $('#timeline-button').offset().top;
-			$(window).scroll(function() {
+		if (typeof post_id !== "undefined") {
+			console.log(post_id);
+		}
+		else {
+			load_blog(function (blog_html) {
+				$('#main-content').html(blog_html);
 				var margin_left = '47px';
-				if ($(window).width() < 992) {
-					margin_left = '2%';
-				}
-				var current_scroll = $(window).scrollTop();
-				if (current_scroll >= dropdown_pos) {
-					$('#timeline-button').css({
-						position: 'fixed',
-						top: '7px',
-					});
-				}
-				else {
-					$('#timeline-button').css({
-						position: 'absolute',
-						"margin-top": '25px',
-						"margin-left": margin_left,
-						"top": "auto"
-					});
-				}
-			});
-		var hash_id = window.location.hash.substr(1, window.location.hash.length);
-		if (typeof document.getElementsByName(hash_id)[0] !== 'undefined')
-			document.getElementsByName(hash_id)[0].scrollIntoView();			
-		});	
+				if ($(window).width() < 992)	margin_left = '2%';
+				$('#timeline-button').css({
+					position: 'absolute',
+					"margin-top": '25px',
+					"margin-left": margin_left,
+					"top": "auto"
+				});
+				$('.button-collapse').sideNav({
+					menuWidth: 400,
+					closeOnClick: true
+				});
+				if (window.matchMedia("(min-device-width: 900px)").matches)
+					$('.tooltipped').tooltip({delay: 50});
+				var dropdown_pos = $('#timeline-button').offset().top;
+				$(window).scroll(function() {
+					var margin_left = '47px';
+					if ($(window).width() < 992) {
+						margin_left = '2%';
+					}
+					var current_scroll = $(window).scrollTop();
+					if (current_scroll >= dropdown_pos) {
+						$('#timeline-button').css({
+							position: 'fixed',
+							top: '7px',
+						});
+					}
+					else {
+						$('#timeline-button').css({
+							position: 'absolute',
+							"margin-top": '25px',
+							"margin-left": margin_left,
+							"top": "auto"
+						});
+					}
+				});
+			var hash_id = window.location.hash.substr(1, window.location.hash.length);
+			if (typeof document.getElementsByName(hash_id)[0] !== 'undefined')
+				document.getElementsByName(hash_id)[0].scrollIntoView();			
+			});	
+		}
 	}
 	else if (page == 'projects') {
 		$('#main-content').empty();
@@ -69,7 +75,7 @@ function load_page() {
 
 $(document).ready(function() {
 	$(".button-collapse").sideNav({
-		menuWidth: 400,
+		menuWidth: 300,
 		closeOnClick: true
 	});	
 	load_page();
