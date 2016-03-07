@@ -74,7 +74,12 @@ function load_page() {
 }
 
 $(document).ready(function() {
+	var nav_width = 300;
+	if (window.matchMedia("(max-device-width: 600px)").matches) {
+		nav_width = '50%';
+	}
 	$(".button-collapse").sideNav({
+		menuWidth: nav_width,
 		closeOnClick: true
 	});	
 	load_page();
