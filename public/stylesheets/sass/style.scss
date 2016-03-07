@@ -46,7 +46,9 @@ $divider-color: #B6B6B6;
 
 @media screen and (max-device-width: 600px) {
 	#mobile-nav {
-		font-size: x-large;
+		li {
+			font-size: x-large;
+		}
 	}
 }
 
