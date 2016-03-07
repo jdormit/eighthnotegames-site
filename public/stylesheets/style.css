@@ -1,7 +1,6 @@
 @media screen and (max-device-width: 600px) {
   #mobile-nav {
-    font-size: 24px;
-    background-color: #f44336; } }
+    font-size: 40px; } }
 .background-wrapper {
   margin-left: 7%;
   margin-right: 7%;
