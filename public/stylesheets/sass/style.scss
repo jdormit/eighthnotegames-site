@@ -45,8 +45,8 @@ $divider-color: #B6B6B6;
 }
 
 @media screen and (max-device-width: 600px) {
-	#mobile-nav {
-		width: 500px;
+	.side-nav {
+		width: 50%;
 	}
 }
 
