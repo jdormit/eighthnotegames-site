@@ -9,10 +9,9 @@ function load_page() {
 		});
 	}
 	else if (page == 'blog') {
-		console.log('blog');
 		$('#main-content').empty();
 		if (typeof post_id !== "undefined") {
-			console.log(post_id);
+			load_blog_post(post_id);
 		}
 		else {
 			load_blog(function (blog_html) {
@@ -84,6 +83,12 @@ $(document).ready(function() {
 	});	
 	load_page();
 });
+
+function load_blog_post(post_id, callback) {
+	$.post('/get_post', {post_id: post_id}, function(response) {
+		console.log(response);
+	});
+}
 
 function load_blog(callback) {
 	var get_comments = function(comments_json) {

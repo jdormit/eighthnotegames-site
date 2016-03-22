@@ -3,10 +3,9 @@ extends layout
 block append scripts
 	script(type='text/javascript').
 		var page = !{page};
-	if (!{post_id})
+	if (post_id)
 		script(type='text/javascript').
-			var post_id = !{post_id};
-			console.log(post_id);
+			var post_id = '#{post_id}';
 	script(src='./javascripts/home.js')
 
 block header

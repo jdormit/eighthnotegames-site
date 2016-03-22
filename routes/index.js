@@ -1,5 +1,7 @@
+var http = require('http');
 var express = require('express');
 var router = express.Router();
+var blog = require('../models/blog');
 var Twitter = require('twitter-node-client').Twitter;
 var twitter_config = {
 	'consumerKey':'Csmm5LvpLvaPnijd72U2zdzqL',
@@ -13,23 +15,27 @@ var twitterError = function(err, response, body) {
 	console.log('Twitter Error: ' + JSON.stringify(err));
 };
 
+var apiKey = 'AIzaSyBkDcdPSiDFBoZrGCrQvIWUrO3AAkiz55g';
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	res.render('index', { title: 'Eighth Note Games', page: '"main"'});
 });
 
-// router.get('/blog/:post_id', function(req, res, next) {
-	// var post_id = String(req.params.post_id);
-// //	res.render('index', {title: 'Eighth Note Games', page: '"blog"', post_id: post_id});
-	// res.render('index', {title: 'Eighth Note Games', page: '"blog"'});
-// });
+router.get('/blog/:post_id', function(req, res, next) {
+	var post_id = String(req.params.post_id);
+	res.render('index', {title: 'Eighth Note Games', page: '"blog"', post_id: post_id});
+});
 
-// router.param('post_id', function(req, res, next) {
-	// res.post_id = req.post_id;
-	// next();
-// });
+router.post('/get_post', function(req, res, next) {
+	http.get('https://www.googleapis.com/blogger/v2/blogs/3197908088530535834/posts/8435695384925321771/&key=' + apiKey, function(response) {
+		console.log('response: ' + response);
+		res.send(response);
+	});
+});
 
 router.get('/blog', function(req, res, next) {
+	blog.getAll();
 	res.render('index', { title: 'Eighth Note Games', page: '"blog"'});
 });
 
